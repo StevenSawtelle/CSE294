@@ -18,7 +18,7 @@
 *.jar
 *.rar
 *.tar
-.zip
+*.zip
 
 # Logs and databases #
 ######################
@@ -28,7 +28,7 @@
 
 #my stuff#
 ##########
-.docx
+*.docx
 
 
 # OS generated files #
