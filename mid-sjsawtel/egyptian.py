@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
+
 from fractions import Fraction
 #easiest way to avoid issues with floating imprecision is use fractions
-
+import sys
 
 def getUnitFraction(num, den, count, unitFractionList):
     #fraction to be used for this iteration of count
@@ -62,38 +64,27 @@ def process(num, den):
     return stri
 
 def main():
-    # clear file
-    f = open('egyptian-out.txt', 'w')
-    f.write('')
-    f.close()
-
-    # blank list of input values
+    #get input
+    inputs = sys.stdin.readlines()
     content = []
-    # read from file
-    with open('egyptian-in.txt') as f:
-        for line in f:
-            n1, n2 = (int(s) for s in line.split())
-            content.append(n1)
-            content.append(n2)
+    for line in inputs:
+        content.append([int(x) for x in line.split() if x.isdigit()])
+    currentNum1 = content[0][0]
+    currentNum2 = content[0][1]
+    i=1
     #blank set
-    if(content[0]==0):
+    if(currentNum1==0):
         return
-
-    currentNum1 = content[0]
-    currentNum2 = content[1]
-    i=2
     #for each set of numbers a, b get the UFs that total to be a/b
     while True:
         if(currentNum1==0 or currentNum2==0):
             break
         temp = process(currentNum1, currentNum2)
-        #write to output file
-        f = open('egyptian-out.txt', 'a')
-        f.write(temp)
-        f.close()
-        currentNum1 = content[i]
-        currentNum2 = content[i+1]
-        i+=2
+        #print out string
+        sys.stdout.write(temp)
+        currentNum1 = content[i][0]
+        currentNum2 = content[i][1]
+        i+=1
 
 if __name__ == "__main__":
     main()

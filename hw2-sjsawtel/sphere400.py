@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+import sys
+
 def decrypt(columns, encStr):
     #sep1 is first number to increment char counter by
     sep1 = columns*2-1
@@ -42,23 +45,9 @@ def decrypt(columns, encStr):
         sep2+=2
     return finalString
 
-def getContent():
-    content = []
-    # read from file
-    with open('sphere400-test.in') as f:
-        content = f.readlines()
-    # take away all new lines
-    content = [x.strip('\n') for x in content]
-    return content
-
 def main():
-    # clear file
-    f = open('sphere400-test.out', 'w')
-    f.write('')
-    f.close()
-
     # blank list of input values
-    content = getContent()
+    content = sys.stdin.readlines()
     # for each pair in the input file
     z=0
     while(z<len(content)):
@@ -69,9 +58,7 @@ def main():
         #get string and calculate decoded value
         decodedString = decrypt(number, content[z+1])
         #write to file
-        f = open('sphere400-test.out', 'a')
-        f.write(decodedString+"\n")
-        f.close()
+        sys.stdout.write(decodedString)
         z+=2
 
 if __name__ == "__main__":

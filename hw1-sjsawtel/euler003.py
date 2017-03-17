@@ -6,6 +6,7 @@ Steven Sawtelle
 sjsawtel@asu.edu
 """
 import math
+import sys
 
 def isPrime(n):
     #checks if n is prime
@@ -48,17 +49,15 @@ def makeNiceList(primeFactors):
 
 def printPrimeFactors(input, factorFrequencyList):
     #outputs prime factors to file as per assignment instructions
-    f = open('euler003-test.out', 'a')
-    f.write(str(input) + " = ")
+    sys.stdout.write(str(input) + " = ")
     for l in factorFrequencyList:
-        f.write("("+str(l[0]))
+        sys.stdout.write("("+str(l[0]))
         #easy way to handle exponents of 1
         if(l[1]!=1):
-            f.write("^"+str(l[1])+")")
+            sys.stdout.write("^"+str(l[1])+")")
         else:
-            f.write(")")
-    f.write('\n')
-    f.close()
+            sys.stdout.write(")")
+    sys.stdout.write("\n")
 
 def generateFactors(n):
     #generates list of factors for number n
@@ -105,20 +104,9 @@ def process(n):
 """
 MAIN
 """
-#clear file
-f = open('euler003-test.out', 'w')
-f.write('')
-f.close()
-#blank list of input values
-content=[]
-#read from file
-with open('euler003-test.in') as f:
-    content = f.readlines()
-#take away all new lines
-content = [x.strip('\n') for x in content]
-
-#for each number in the input file
-for input in content:
+lines = sys.stdin.readlines()
+#input = int(input())
+for input in lines:
     input = int(input)
     #if its prime skip all the fancy stuff
     if isPrime(input):

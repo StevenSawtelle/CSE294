@@ -1,6 +1,10 @@
+#!/usr/bin/env python3
+
 #program to take values from 1/a to 1/b and find the longest repeating decimal
 #   sequence in between where a and b are non negative integer inputs. taken
 #   from project euler problem 26
+
+import sys
 
 def getRepeat(x):
     #setup
@@ -63,38 +67,25 @@ def process(x, y, count):
     return stri
 
 def main():
-    # clear file
-    f = open('euler026-out.txt', 'w')
-    f.write('')
-    f.close()
-
-    # blank list of input values
+    # get input
+    inputs = sys.stdin.readlines()
     content = []
-    # read from file
-    with open('euler026-in.txt') as f:
-        for line in f:
-            n1, n2 = (int(s) for s in line.split())
-            content.append(n1)
-            content.append(n2)
-    # blank set
-    if (content[0] == 0):
+    for line in inputs:
+        content.append([int(x) for x in line.split() if x.isdigit()])
+    currentNum1 = content[0][0]
+    currentNum2 = content[0][1]
+    if (currentNum1 == 0):
         return
-    currentNum1 = content[0]
-    currentNum2 = content[1]
-    i = 2
-    count = 1
+    i = 1
     while True:
         #write each line of processing to the output file
         if (currentNum1 == 0 or currentNum2 == 0):
             break
-        temp = process(currentNum1, currentNum2, count)
-        f = open('euler026-out.txt', 'a')
-        f.write(temp)
-        f.close()
-        currentNum1 = content[i]
-        currentNum2 = content[i + 1]
-        i += 2
-        count+=1
+        temp = process(currentNum1, currentNum2, i)
+        sys.stdout.write(temp)
+        currentNum1 = content[i][0]
+        currentNum2 = content[i][1]
+        i += 1
     return
 
 if __name__ == "__main__":
