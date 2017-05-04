@@ -20,6 +20,18 @@ def checkTidy(lst):
 			return False
 	return True
 
+def continuousLoop(splitVals):
+	#key is that if a number is less than a number to its right, you need
+	#to decrement that number and change all to the right to 9
+	#this does not always work so the new number should be checked to make
+	#sure it now fulfills "tidiness". otherwise keep doing it
+	while not checkTidy(splitVals):
+		for x in range(len(splitVals)-1):
+			if splitVals[x] > splitVals[x+1]:
+				splitVals[x] = splitVals[x] - 1
+				for y in range(x+1,len(splitVals)):
+					splitVals[y] = 9
+
 def makeTidy(n):
 	#funcion shall check if a number is "tidy" , ie) increasing
 	#integers when read individually from left to right
@@ -30,18 +42,7 @@ def makeTidy(n):
 		n = n // 10
 	#now have all digits in splitVals, flip it for easy use
 	splitVals = splitVals[::-1]
-	#key is that if a number is less than a number to its right, you need
-	#to decrement that number and change all to the right to 9
-	#this does not always work so the new number should be checked to make
-	#sure it now fulfills "tidiness". otherwise keep doing it
-	while not checkTidy(splitVals):
-		print(splitVals)
-		for x in range(len(splitVals)-1):
-			if splitVals[x] > splitVals[x+1]:
-				splitVals[x] = splitVals[x] - 1
-				for y in range(x+1,len(splitVals)):
-					splitVals[y] = 9
-		#print(splitVals)
+	continuousLoop(splitVals)
 	#reconstruct num
 	base = 1
 	splitVals = splitVals[::-1]
