@@ -29,6 +29,7 @@ class TreeNode:
         self.right = None
 
 def printOut(root):
+    print("begin")
     #thisLevel will track current level of nodes
     thisLevel = [root]
     while thisLevel:
@@ -36,13 +37,14 @@ def printOut(root):
         #print each element of thisLevel and add all of its
         #children to nextLevel
         for n in thisLevel:
-            print(str(n.val)+" ",end="")
+            print((n.val), end = ' ')
             if n.left: nextLevel.append(n.left)
             if n.right: nextLevel.append(n.right)
         print()
         #update thisLevel to be the nextLevel
         thisLevel = nextLevel
         #will stop when nextLevel is empty then, which is good
+    print("end")
 
 def flip(root):
     if not root:
