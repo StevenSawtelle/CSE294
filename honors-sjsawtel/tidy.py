@@ -14,8 +14,51 @@ ie)
 
 import sys
 
+def checkTidy(lst):
+	for x in range(0, len(lst)-1):
+		if lst[x] > lst[x+1]:
+			return False
+	return True
+
+def makeTidy(n):
+	#funcion shall check if a number is "tidy" , ie) increasing
+	#integers when read individually from left to right
+	splitVals = []
+	while n > 0:
+		currentVal = n % 10
+		splitVals.append(currentVal)
+		n = n // 10
+	#now have all digits in splitVals, flip it for easy use
+	splitVals = splitVals[::-1]
+	#key is that if a number is less than a number to its right, you need
+	#to decrement that number and change all to the right to 9
+	#this does not always work so the new number should be checked to make
+	#sure it now fulfills "tidiness". otherwise keep doing it
+	while not checkTidy(splitVals):
+		print(splitVals)
+		for x in range(len(splitVals)-1):
+			if splitVals[x] > splitVals[x+1]:
+				splitVals[x] = splitVals[x] - 1
+				for y in range(x+1,len(splitVals)):
+					splitVals[y] = 9
+		#print(splitVals)
+	#reconstruct num
+	base = 1
+	splitVals = splitVals[::-1]
+	tidynum = 0
+	for x in range(len(splitVals)):
+		tidynum += base * splitVals[x]
+		base *= 10
+	return tidynum
+
 def main():
-	
+	#driver for this file, get size, then get that many inputs and process them
+	inputSize = int(sys.stdin.readline())
+	#have number of numbers to test, now start that testing process
+	for x in range(1, inputSize+1):
+		currentNum = int(sys.stdin.readline())
+		tidynum = makeTidy(currentNum)
+		print("Case #" + str(x) + ": " + str(tidynum))
 
 #never forget this lil dude!
 if __name__ == "__main__":
