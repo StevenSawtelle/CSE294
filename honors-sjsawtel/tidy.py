@@ -3,8 +3,12 @@
 #name: Steven Sawtelle
 #CSE 294
 #started: 5-4-17
+
 """
-program shall take in a given amount of numbers, and then
+view the source definition of this problem: Tidy Numbers at:
+https://code.google.com/codejam/contest/3264486/dashboard#s=p1
+
+this program shall take in a given amount of numbers, and then
 for that many numbers determine if it is "tidy" - that is,
 if the numbers from left to right are (not strictly) increasing
 ie)
