@@ -28,7 +28,7 @@ third flip: ++++++++ <- from index 5-7 flipped
 so the output is number of flips: 3
 """
 
-import sys, time
+import sys
 
 def doAPass(inputstring, inputnum):
 	#function to flip a string once with inputnum elements being flipped
